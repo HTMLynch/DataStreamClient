@@ -282,7 +282,26 @@ void DrawLabels(char *appName)
 {
 #if ! defined(__linux__)
     // This makes ANSI escape sequences work on Windows
-    ::system(" ");
+    HANDLE  hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if(hOut != INVALID_HANDLE_VALUE) {
+        DWORD   dwOriginalOutMode = 0;
+        if(GetConsoleMode(hOut, &dwOriginalOutMode)) {
+            DWORD   dwRequestedOutModes = ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+            DWORD   dwOutMode = dwOriginalOutMode | dwRequestedOutModes;
+            if(SetConsoleMode(hOut, dwOutMode)) {
+                ::system(" ");
+            } else {
+                ::printf("\n\nWindows 10 sucks Unable to set console mode\n");
+                exit(0);
+            }
+        } else {
+            ::printf("\n\nWindows 10 sucks Unable to get console mode\n");
+            exit(0);
+        }
+    } else {
+        ::printf("\n\nWindows 10 sucks Unable to get stdout handle\n");
+        exit(0);
+    }
 #endif
 
     // Clear the screen
