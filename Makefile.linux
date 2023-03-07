@@ -1,0 +1,25 @@
+
+all:	ll-client
+ 
+INCS := LowLatencyDataClient.h ll-client.h
+
+SRCS := LowLatencyDataClient.cpp ll-client.cpp cross-platform.cpp display.cpp
+
+
+OBJS := $(patsubst %.cpp,%.o,$(SRCS))
+
+
+ll-client:	$(OBJS)
+	${CXX} ${CXXFLAGS} ${LDFLAGS} -std=c++17 -O3 -Wall -Werror -o $@ $(OBJS) -lboost_system -lpthread
+
+%.o:	%.cpp $(INCS)
+	${CXX} ${CXXFLAGS} -std=c++17 -O3 -Wall -Werror -c -o $@ $<
+
+
+install:
+	install -d -m 0755 ${DESTDIR}${BINDIR}
+	install -v -m 0755 ll-client ${DESTDIR}${BINDIR}
+
+clean:
+	-rm -f *.o
+	-rm -f ll-client
