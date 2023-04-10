@@ -9,3 +9,8 @@ Dependencies:
 Linux:  Boost 1.72 or later
 
 Windows & Linux:  Nlohmann/JSON - https://github.com/nlohmann/json
+
+
+Install boost on Ubuntu via:
+
+    sudo apt-get install libboost-all-dev
