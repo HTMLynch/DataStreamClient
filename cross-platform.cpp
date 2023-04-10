@@ -54,9 +54,10 @@ void keyPressMonitor(uint32_t uTimeoutMS, std::function<void(char)> cb)
             int r = ::select(fileno(stdin)+1, &set, nullptr, nullptr, &tv);
             if(r > 0) {
                 char    c;
-                ::read(fileno(stdin), &c, 1);
-                if(c == 'q') break;
-                else cb(c);
+                if(::read(fileno(stdin), &c, 1)) {
+                    if(c == 'q') break;
+                    else cb(c);
+                }
 
             } else if(r < 0) {
                 break;
