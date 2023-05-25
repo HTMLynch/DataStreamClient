@@ -88,7 +88,7 @@ void LowLatencyDataClient::SocketReadThread(void)
                 continue;
 
             } else if(nBufferOffset < ::ntohl(pHeader->length)) {
-                if(::ntohl(pHeader->id) > 3 &&
+                if(::ntohl(pHeader->id) > 7 &&
                     ::ntohl(pHeader->id) != METADATA_ID) {
 
                     std::cerr << "Bad id " << std::hex <<
