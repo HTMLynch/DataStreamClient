@@ -175,6 +175,23 @@ static void ToggleSubscribeState(int nChannelRow, LowLatencyDataClient& llc)
 }
 
 //
+// Function used to subscribe/unsubscribe all channels
+//
+static void ToggleSubscribeAll(LowLatencyDataClient& llc)
+{
+    std::vector<ChannelInfo>    vChannelsList;
+    for(auto it = g_mChannelInformation.begin();
+        it != g_mChannelInformation.end(); it++) {
+        ChannelInfo ci;
+        std::string sName = (*it).first;
+        ci.sName.assign(sName);
+        ci.nDecimationFactor = 1;
+        vChannelsList.push_back(ci);
+    }
+    llc.SubscribeChannels(vChannelsList);
+}
+
+//
 // Function used to toggle acquistion on/off
 //
 static void ToggleAcquisitionState(LowLatencyDataClient& llc)
@@ -346,6 +363,9 @@ int main(int argc, char *argv[])
         } else if(key == ' ') {
             // Subscribe/Unsubscribe channel on current channel row
             ToggleSubscribeState(currentChannelRow, llc);
+
+        } else if(key == 's') {
+            ToggleSubscribeAll(llc);
 
         } else if(key == 'a') {
             // Acquisition start/stop

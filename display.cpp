@@ -342,7 +342,8 @@ void DrawLabels(char *appName)
 
     screen_position(LAST_ROW, 1);
     std::cout <<
-        "'q'=quit, 'u'=up, 'd'=down, 'a'=acq on/off, <space>=sub/unsub" <<
+        "'q'=quit, 'u'=up, 'd'=down, 'a'=acq on/off, <space>=sub/unsub, " <<
+        "'s'=suball/unsuball" <<
         std::flush;
 
     screen_position(currentChannelRow + CHANNEL_START_ROW, NAME_COLUMN);
@@ -371,7 +372,8 @@ void UpdateChannels(void)
 
     screen_position(LAST_ROW, 1);
     std::cout <<
-        "'q'=quit, 'u'=up, 'd'=down, 'a'=acq on/off, <space>=sub/unsub" <<
+        "'q'=quit, 'u'=up, 'd'=down, 'a'=acq on/off, <space>=sub/unsub, " <<
+        "'s'=suball/unsuball" <<
         std::flush;
 
     screen_position(currentChannelRow + CHANNEL_START_ROW, NAME_COLUMN);
