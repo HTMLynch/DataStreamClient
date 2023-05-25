@@ -389,6 +389,9 @@ void LowLatencyDataClient::ProcessMetadataPacket(
         else if(j.contains("acquisition_state"))
             ProcessAcquisitionStatePacket(j);
 
+        else if(j.contains("status"))
+            ;
+
         else
             std::cerr << "Unknown JSON" << std::endl << j.dump() << std::endl;
     }
