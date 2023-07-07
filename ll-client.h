@@ -82,7 +82,8 @@
 
 #define APP_ROW             1
 #define TITLE_ROW           (APP_ROW + 2)
-#define COLUMN_HEADINGS_ROW (TITLE_ROW + 2)
+#define ACQ_TIME_ROW        (TITLE_ROW + 2)
+#define COLUMN_HEADINGS_ROW (ACQ_TIME_ROW + 2)
 #define CHANNEL_START_ROW   (COLUMN_HEADINGS_ROW + 1)
 #define LAST_ROW            25
 
@@ -113,6 +114,7 @@ void UpdateChannels(void);
 void PrintChannelRow(int row, const ChannelInfo& ci);
 void UpdateChannelName(bool);
 void PrintChannelData(const ChannelDataInfo *);
+void PrintAcquisitionStartTime(const std::string&);
 
 void keyPressMonitor(uint32_t, std::function<void(char)>);
 

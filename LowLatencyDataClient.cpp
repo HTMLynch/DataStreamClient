@@ -325,12 +325,22 @@ void LowLatencyDataClient::ProcessUnavailableChannelsPacket(json& j)
     }
 }
 
+//
+// Function used to get the precise start time of the acquisition
+//
+const std::string& LowLatencyDataClient::PreciseAcquisitionStartTime(void)
+{
+    return m_sPreciseAcquisitionStartTime;
+}
+
 
 //
 // Function used to process an acquisition state packet
 //
 void LowLatencyDataClient::ProcessAcquisitionStatePacket(json& j)
 {
+    m_sPreciseAcquisitionStartTime.assign("NOT ACQUIRING");
+
     if(j["acquisition_state"] == "off") {
         // If acquisition state is "off" reset the first sample timestamps for
         // all of the subscribed channels.
@@ -352,6 +362,11 @@ void LowLatencyDataClient::ProcessAcquisitionStatePacket(json& j)
 
     } else if(j["acquisition_state"] == "on") {
         m_bAcquisitionState = true;
+
+        if(j.contains("precise_acquisition_start_time")) {
+            m_sPreciseAcquisitionStartTime.assign(
+                j["precise_acquisition_start_time"]);
+        }
     }
 
     m_fEventHandler(EVENT_TYPE_ACQUIRE, &m_bAcquisitionState,

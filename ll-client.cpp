@@ -372,6 +372,8 @@ int main(int argc, char *argv[])
             ToggleAcquisitionState(llc);
         }
 
+        PrintAcquisitionStartTime(llc.PreciseAcquisitionStartTime());
+
     });
 
 

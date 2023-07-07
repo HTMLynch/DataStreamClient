@@ -106,6 +106,8 @@ class LowLatencyDataClient {
 
         void Acquire(void);
 
+        const std::string& PreciseAcquisitionStartTime(void);
+
     private:
 
         void Connect(boost::asio::io_context& io_context,
@@ -149,6 +151,8 @@ class LowLatencyDataClient {
         std::unique_ptr<tcp::socket>        m_Socket;
 
         std::map<std::string, double>       m_mFSTS;    // first sample ts's
+
+        std::string                         m_sPreciseAcquisitionStartTime;
 };
 
 #endif

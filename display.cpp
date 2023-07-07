@@ -397,3 +397,12 @@ void UpdateChannelName(bool bHighlight)
         }
     }
 }
+
+void PrintAcquisitionStartTime(const std::string& sTimeString)
+{
+    std::unique_lock<std::recursive_mutex>  lk(l_PrintLock);
+    screen_position(ACQ_TIME_ROW, 0);
+    clear_eol();
+    std::cout << "Precise Acquisition Start TIme: " << sTimeString <<
+        std::flush;
+}
